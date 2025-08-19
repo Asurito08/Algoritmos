@@ -11,18 +11,30 @@ def gen_array(array_size):
 
 def bubble_sort(arr):
     n = len(arr)
-    last_swap = n - 1
-    for i in range(n):
+    left = 0
+    right = n - 1
+    while left < right:
         swapped = False
-        current_swap = 0
-        for j in range(last_swap):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        # Forward pass (left to right)
+        for i in range(left, right):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
                 swapped = True
-                current_swap = j
-        last_swap = current_swap
+                last_swap = i
         if not swapped:
             break
+        right = last_swap
+        # Backward pass (right to left)
+        swapped = False
+        for i in range(right, left, -1):
+            if arr[i] < arr[i - 1]:
+                arr[i], arr[i - 1] = arr[i - 1], arr[i]
+                swapped = True
+                last_swap = i
+        if not swapped:
+            break
+        left = last_swap
+    return arr
 
 if __name__ == "__main__":
     array1 = gen_array(10)
