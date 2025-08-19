@@ -1,5 +1,5 @@
 ## Integrantes
 - Wilson Chavarría Miranda
 - Fabricio Padilla Madrigal
-- Sawyer
+- Sawyer Dixon Roub
 - Andrés
