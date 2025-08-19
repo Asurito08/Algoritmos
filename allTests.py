@@ -1,4 +1,6 @@
 import random
+import subprocess
+import threading
 import time
 
 def gen_array(arr_size):
@@ -83,8 +85,30 @@ def test_sort(arr_size, sorter, iterations):
 def average(times):
     return (sum(times) / len(times)) * 1000
 
+def print_wait_message():
+    subprocess.run("clear")
+    while prossesing.is_set():
+        print("running tests")
+        time.sleep(1)
+        subprocess.run("clear")
+        print("running tests.")
+        time.sleep(1)
+        subprocess.run("clear")
+        print("running tests..")
+        time.sleep(1)
+        subprocess.run("clear")
+        print("running tests...")
+        time.sleep(1)
+        subprocess.run("clear")
+
 if __name__ == "__main__":
     iterations = int(input("Input the number of iterations for testing: "))
+
+    prossesing = threading.Event()
+    prossesing.set()
+
+    thread = threading.Thread(target=print_wait_message)
+    thread.start()
 
     times10bubble = test_sort(10, bubble_sort, iterations)
     times100bubble = test_sort(100, bubble_sort, iterations)
@@ -101,6 +125,9 @@ if __name__ == "__main__":
     times10Deapseek = test_sort(10, bubble_sort_Deepseek, iterations)
     times100Deapseek = test_sort(100, bubble_sort_Deepseek, iterations)
     times1000Deapseek = test_sort(1000, bubble_sort_Deepseek, iterations)
+
+    prossesing.clear()
+    thread.join()
 
     average10 = {'Standard Bubble': average(times10bubble),
                  'ChatGPT': average(times10ChatGPT),
@@ -129,7 +156,7 @@ if __name__ == "__main__":
                      'Gemini': average(times1000Gemini),
                      'Deepseek': average(times1000Deapseek)}
     
-    print("\nResults:\n")
+    print("Results:\n")
     print(f"{'Algorithm':<20} | {'Time on array 10':>20} | {'Time on array 100':>20} | {'Time on array 1000':>20}")
     print("-" * 21 + "|" + f"{'-' * 22}|" * 2 + "-" * 21)
     print(f"{'Standard Bubble':<20} | {average10['Standard Bubble']:>17.6} ms | {average100['Standard Bubble']:>17.6} ms | {average1000['Standard Bubble']:>17.6} ms")
