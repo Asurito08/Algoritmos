@@ -90,7 +90,7 @@ def test_sort(arr_size, sorter, iterations):
         start_time = time.time()
         temp = sorter(arr)
         if temp != sorted(arr):
-            print(f"Error: Sorting failed for array size {arr_size} on iteration {i+1}")
+            print(f"Error: Sorting failed for array size {arr_size} on iteration {i+1} for sorter {sorter}")
         times.append(time.time() - start_time)
     return times
 
@@ -126,9 +126,9 @@ if __name__ == "__main__":
     times100bubble = test_sort(100, bubble_sort, iterations)
     times1000bubble = test_sort(1000, bubble_sort, iterations)
     
-    times10ChatGPT = test_sort(10, bubble_sort, iterations)
-    times100ChatGPT = test_sort(100, bubble_sort, iterations)
-    times1000ChatGPT = test_sort(1000, bubble_sort, iterations)
+    times10ChatGPT = test_sort(10, bubble_sort_ChatGPT, iterations)
+    times100ChatGPT = test_sort(100, bubble_sort_ChatGPT, iterations)
+    times1000ChatGPT = test_sort(1000, bubble_sort_ChatGPT, iterations)
 
     times10Gemini = test_sort(10, bubble_sort_Gemini, iterations)
     times100Gemini = test_sort(100, bubble_sort_Gemini, iterations)
